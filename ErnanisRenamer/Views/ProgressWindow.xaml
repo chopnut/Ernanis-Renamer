@@ -1,0 +1,20 @@
+﻿<Window x:Class="ErnanisRenamer.Views.ProgressWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ProgressWindow" Height="150" Width="300" ResizeMode="NoResize" WindowStyle="None">
+    <Grid x:Name="gridMain">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="66"></RowDefinition>
+            <RowDefinition Height="33*"></RowDefinition>
+            <RowDefinition Height="64*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <ProgressBar x:Name="pbBar" Grid.Row="1" HorizontalAlignment="Left" Height="5" VerticalAlignment="Center" Width="{Binding ProgressWindowWidth}" Margin="40,13,46.333,10.333"/>
+        <TextBlock x:Name="tbStatus" Grid.Row="0" HorizontalAlignment="Left" Margin="40,50,40,0" TextWrapping="Wrap" Text="{Binding ProgressWindowStatus}" VerticalAlignment="Top" FontSize="12"/>
+        <Border Grid.Row="2" Padding="42,3" Margin="0,0,0.333,0.333" >
+            <StackPanel>
+                <Button Content="{Binding ProgressWindowButtonLabel}" Click="Button_Cancel_Click" Height="25"/>
+            </StackPanel>
+        </Border>
+        <Label x:Name="lblPercentage" Content="{Binding ProgressWindowPercentage}" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="0" Margin="210,70,0,0" Grid.RowSpan="2"/>
+    </Grid>
+</Window>

@@ -1,0 +1,75 @@
+﻿<Window x:Name="ErnanisRenamer" x:Class="ErnanisRenamer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Ernani's Renamer" Height="489.089" Width="312.06" ResizeMode="NoResize" WindowStyle="ThreeDBorderWindow"
+        xmlns:local="clr-namespace:ErnanisRenamer"
+        xmlns:converters="clr-namespace:ErnanisRenamer.Converters"
+        xmlns:models="clr-namespace:ErnanisRenamer.Models"
+        xmlns:views="clr-namespace:ErnanisRenamer.Views"
+        xmlns:viewmodel="clr-namespace:ErnanisRenamer.ViewModels"
+        xmlns:aprop="clr-namespace:ErnanisRenamer.AttachedProperties"
+        >
+    <Window.Resources>
+        <converters:FilterFileTypeConverter x:Key="FilterFileTypeConverter"></converters:FilterFileTypeConverter>
+        <converters:FolderPathMultiFileConverter x:Key="FolderPathMultiFileConverter"></converters:FolderPathMultiFileConverter>
+        <converters:FileTypeMConverter x:Key="FileTypeMConverter"></converters:FileTypeMConverter>
+        <converters:IsSelectedFilesConverter x:Key="IsSelectedFilesConverter"></converters:IsSelectedFilesConverter>
+        <converters:PrefixSuffixConverter x:Key="PrefixSuffixConverter"></converters:PrefixSuffixConverter>
+    </Window.Resources>
+    <Grid x:Name="gridMain">
+        <Grid x:Name="gridOptions">
+            <Label Content="Prefix/Start" HorizontalAlignment="Left" Margin="11,68,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
+            <Label Content="Suffix/End" HorizontalAlignment="Left" Margin="11,137,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
+            <Label Content="FileTypes" HorizontalAlignment="Left" Margin="152,68,0,0" VerticalAlignment="Top" FontSize="14" FontWeight="Bold"/>
+            <TextBox Text="{Binding Prefix, Converter={StaticResource PrefixSuffixConverter}, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding Busy}" x:Name="prefix" HorizontalAlignment="Left" Height="26" Margin="10,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="130" FontSize="14"/>
+            <TextBox Text="{Binding Suffix, Converter={StaticResource PrefixSuffixConverter}, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding Busy}" x:Name="suffix" HorizontalAlignment="Left" Height="26" Margin="10,163,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="130" FontSize="14"/>
+            <TextBox Text="{Binding FolderPath, Converter={StaticResource FolderPathMultiFileConverter}, Mode=TwoWay}" IsEnabled="{Binding Busy}" x:Name="folder_path" HorizontalAlignment="Left" Height="25" Margin="10,43,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="272" IsReadOnly="True"/>
+            <TextBox Text="{Binding FileTypes, Converter={StaticResource FilterFileTypeConverter}, UpdateSourceTrigger=LostFocus}"  x:Name="filter" HorizontalAlignment="Left" Height="26" Margin="152,94,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="130" FontSize="14" >
+                <TextBox.IsEnabled>
+                    <MultiBinding Converter="{StaticResource FileTypeMConverter}">
+                        <Binding ElementName="cbSelectFiles" Path="IsChecked" /><!--*cbSelectFiles is the checkbox element and Path is the property-->
+                        <Binding Path="Busy"  />
+                    </MultiBinding>
+                </TextBox.IsEnabled>
+            </TextBox>
+            <CheckBox x:Name="rem_pref" IsEnabled="{Binding Busy}" Content="remove prefix first" HorizontalAlignment="Left" Margin="11,124,0,0" VerticalAlignment="Top" IsChecked="{Binding RemovePrefixFirst}" />
+            <CheckBox x:Name="rem_suff" IsEnabled="{Binding Busy}" Content="remove suffix first" HorizontalAlignment="Left" Margin="11,193,0,0" VerticalAlignment="Top" IsChecked="{Binding RemoveSuffixFirst}"/>
+            <CheckBox x:Name="cbSelectFiles" Content="Select Files" IsEnabled="{Binding Busy}" HorizontalAlignment="Left" Margin="210,15,0,0" VerticalAlignment="Top" IsChecked="{Binding RenameSelectedFiles}"/>
+            <StackPanel Margin="10,220,10,180">
+                <Label Content="Options" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="13" FontWeight="Bold"/>
+                <CheckBox x:Name="replace" IsEnabled="{Binding Busy}" IsChecked="{Binding RemoveFilename}">Remove filename</CheckBox>
+            </StackPanel>
+
+            <ScrollViewer Margin="10,310,10,10">
+                <StackPanel Margin="0" Background="LightGray" Width="300">
+                    <TextBlock TextWrapping="Wrap" x:Name="summary" Margin="5,5,40,5" FontSize="11" Text="{Binding Summary}" FontWeight="Bold"></TextBlock>
+                    <TextBlock x:Name="status" Margin="5,0" Text="{Binding Status}" TextWrapping="Wrap" FontSize="11" ></TextBlock>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+
+        <Button Command="{Binding RenameNow}" x:Name="bt_rename" Content="RENAME" HorizontalAlignment="Left" Margin="10,270,0,0" VerticalAlignment="Top" Width="272" Height="30" >
+            <Button.IsEnabled>
+                <Binding Path="IsSelectedFiles"/>
+            </Button.IsEnabled>
+        </Button>
+        <Button Command="{Binding BrowseFolder}"  x:Name="browse_folder" Content="Browse Folder or Multiple Files" HorizontalAlignment="Left" Margin="11,10,0,0" VerticalAlignment="Top" Width="193" Height="26" IsEnabled="{Binding Busy}"/>
+        <Grid Margin="152,130,13,195">
+        <Border BorderBrush="Gray" BorderThickness="1" >
+            <WebBrowser aprop:WebBrowserBehaviour.Html="Hello there html" 
+                        x:Name="wbInstruction" HorizontalAlignment="Left" 
+                        Height="120" VerticalAlignment="Top" Width="127" 
+                        RenderTransformOrigin="0.5,0.5">
+                <WebBrowser.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="0"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </WebBrowser.RenderTransform>
+            </WebBrowser>
+        </Border>
+        </Grid>
+    </Grid>
+</Window>
