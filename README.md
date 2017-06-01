@@ -3,3 +3,5 @@ A small simple application that rename files simultaneously in C#/WPF/Shell Exte
 window application that lets you add prefix/suffix to files inside selected folder or selected files.
 
 Feel free to fork this project and make it your own.
+
+This is a Visual Studio 2013 Project.
