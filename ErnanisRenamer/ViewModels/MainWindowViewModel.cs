@@ -179,6 +179,7 @@ namespace ErnanisRenamer.ViewModels
                     _option.FilesSelected = Files;
 
                     // must delete the file afterwards
+                    File.Delete(_option.FolderPath);
                 }
 
                 // int value is -1 File or folder doesnt exist 

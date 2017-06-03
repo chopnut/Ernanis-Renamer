@@ -21,7 +21,7 @@ namespace ErnanisRenamer.Models
             // set defaults for file types
             _fileTypes.Add("*.*");
 
-            _prefix = "x";
+            _prefix = "";
             _suffix = "";
             _removeFilename = _renameSelectedFiles = _busy = false;
             _removePrefixFirst = _removeSuffixFirst = true;

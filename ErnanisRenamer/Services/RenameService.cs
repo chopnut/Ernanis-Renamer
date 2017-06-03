@@ -166,12 +166,13 @@ namespace ErnanisRenamer.Services
                         System.IO.File.Move(v, fullpath); // This will throw exception if file not found 
                         newList.Add(fullpath);
 
-                        increment++;
+                        
                     }
                     catch (FileNotFoundException)
                     {
                         MessageBox.Show(string.Format("{0} does not exist. Skipping to the next one.",v),"Notification",MessageBoxButton.OK);
                     }
+                    increment++;
 
                 }
 
