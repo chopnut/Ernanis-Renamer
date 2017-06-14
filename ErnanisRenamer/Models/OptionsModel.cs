@@ -44,7 +44,7 @@ namespace ErnanisRenamer.Models
             string[] args = Environment.GetCommandLineArgs();
             string folder = null;
 
-            if (args.Length>2)
+            if (args.Length==2)
             {
                 // If argument is not empty
                 // always start with index 1 as the first index is always the running application
