@@ -118,6 +118,12 @@ namespace ErnanisRenamer.Models
 
             List<string> tempFiles = files.Where(x => {
                 string fname = Path.GetFileName(x);
+
+                // Do not include desktop.ini
+                if(fname.ToLower() == "desktop.ini")
+                {
+                    return false;
+                }
                 try
                 {
                     Type valType = x.GetType();

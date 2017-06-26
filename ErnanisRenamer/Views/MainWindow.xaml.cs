@@ -1,21 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 // My own object below
 using ErnanisRenamer.ViewModels;
-using ErnanisRenamer.AttachedProperties;
-using Prism.Commands;
 using Microsoft.Practices.Unity;
 
 namespace ErnanisRenamer
@@ -24,7 +10,7 @@ namespace ErnanisRenamer
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     /// 
-    
+
     public partial class MainWindow : Window
     {
         private UnityContainer ioc;

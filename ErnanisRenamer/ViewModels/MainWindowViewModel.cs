@@ -1,18 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.IO;
-using System.Windows.Forms;
-using System.Diagnostics;
-using System.ComponentModel; 
 
 using Prism.Commands;
 using Prism.Mvvm;
-
-using Microsoft.Win32;
 using Microsoft.Practices.Unity;
 
 using ErnanisRenamer.Services;
@@ -20,8 +12,6 @@ using ErnanisRenamer.Models;
 
 // for using the new file/folder select dialog
 // codepack core and shell is needed for this to load
-using Microsoft.WindowsAPICodePack.Dialogs;
-using ErnanisRenamer.Views;
 
 namespace ErnanisRenamer.ViewModels
 {
@@ -174,6 +164,7 @@ namespace ErnanisRenamer.ViewModels
                     List<string> Files = new List<string>();
                     foreach (var line in lines)
                     {
+
                         Files.Add(line.ToString());
                     }
                     _option.FilesSelected = Files;
